@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<your-username>/<your-repo>.git
+    repoURL: https://github.com/ka1ox/my-k8s-apps.git
     targetRevision: main
     path: apps/nginx
   destination:
