@@ -8,21 +8,17 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: 65.1.1
+    targetRevision: 65.1.1   # pick latest version from ArtifactHub
     helm:
       releaseName: monitoring
       values: |
         grafana:
+          adminPassword: "admin123"
           service:
             type: LoadBalancer
-            port: 8081
-          grafana.ini:
-            server:
-              http_port: 8080
         prometheus:
           service:
             type: LoadBalancer
-            servicePort: 8082
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
