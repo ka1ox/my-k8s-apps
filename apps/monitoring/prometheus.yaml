@@ -8,10 +8,11 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: 61.0.0          # Helm chart version
+    targetRevision: 65.0.0   # pick stable version
     helm:
-      valueFiles:
-        - values.yaml               # relative to apps/monitoring/prometheus/
+      values: |
+        grafana:
+          enabled: false   # we’ll deploy grafana separately
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

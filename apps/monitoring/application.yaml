@@ -1,17 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
-  namespace: monitoring
+  name: monitoring
+  namespace: argocd   # CR lives in argocd
 spec:
   project: gitops
   source:
-    repoURL: https://grafana.github.io/helm-charts
-    chart: grafana
-    targetRevision: 8.6.0           # Helm chart version
-    helm:
-      valueFiles:
-        - values.yaml               # relative to apps/monitoring/grafana/
+    repoURL: https://github.com/ka1ox/my-k8s-apps.git
+    targetRevision: main
+    path: apps/monitoring
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
