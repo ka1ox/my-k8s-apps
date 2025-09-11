@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: apps
     directory:
-      recurse: true   # 👈 ensures subfolders are scanned
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
