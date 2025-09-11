@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/ka1ox/my-k8s-apps.git
     targetRevision: main
     path: apps/myapp
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: myapp
@@ -16,3 +18,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
