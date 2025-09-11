@@ -11,7 +11,7 @@ spec:
     path: apps
     directory:
       recurse: true
-      include: "*.yaml"   # only pick up Application CRDs
+      include: "*.yaml"   # only pick Application CRDs
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

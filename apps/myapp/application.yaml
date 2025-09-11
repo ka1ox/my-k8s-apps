@@ -13,7 +13,7 @@ spec:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: myapp   # workloads go here 👈
+    namespace: myapp   # 👈 workloads deploy here
   syncPolicy:
     automated:
       prune: true
