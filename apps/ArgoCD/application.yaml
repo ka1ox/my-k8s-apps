@@ -6,9 +6,9 @@ metadata:
 spec:
   project: gitops
   source:
-    repoURL: https://argoproj.github.io/argo-helm
-    chart: argo-cd
-    targetRevision: 6.7.12
+    repoURL: https://github.com/ka1ox/my-k8s-apps.git
+    targetRevision: main
+    path: apps/argocd
     helm:
       valueFiles:
         - values.yaml
