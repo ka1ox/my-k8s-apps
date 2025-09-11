@@ -2,22 +2,22 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd
-  namespace: argocd
+  namespace: argocd   # <- Application CR lives here
 spec:
   project: gitops
   source:
     repoURL: https://github.com/ka1ox/my-k8s-apps.git
     targetRevision: main
-    path: apps/argocd
+    path: apps/argocd     # <- This folder has Chart.yaml + values.yaml
     helm:
       valueFiles:
         - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: argocd     # <- ArgoCD itself is deployed here
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:               # ✅ must be inside syncPolicy
+    syncOptions:
       - CreateNamespace=true
