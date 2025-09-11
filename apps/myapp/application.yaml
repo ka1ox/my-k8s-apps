@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: myapp
-  namespace: argocd
+  namespace: argocd   # CR lives in argocd
 spec:
   project: gitops
   source:
@@ -13,7 +13,7 @@ spec:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: myapp
+    namespace: myapp   # workloads go here 👈
   syncPolicy:
     automated:
       prune: true
