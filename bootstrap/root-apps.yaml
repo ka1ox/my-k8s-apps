@@ -11,10 +11,10 @@ spec:
     path: apps
     directory:
       recurse: true
-      include: "*.yaml"   # only pick Application CRDs
+      include: "*.yaml"
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: myapp   # 👈 safe namespace, not argocd
   syncPolicy:
     automated:
       prune: true
