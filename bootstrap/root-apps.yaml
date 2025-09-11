@@ -4,13 +4,13 @@ metadata:
   name: root-apps
   namespace: argocd
 spec:
-  project: default
+  project: gitops
   source:
     repoURL: https://github.com/ka1ox/my-k8s-apps.git
     targetRevision: main
     path: apps
     directory:
-      recurse: true   # important: scan all subfolders
+      recurse: true   # 👈 ensures subfolders are scanned
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
