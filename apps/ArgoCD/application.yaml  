@@ -4,7 +4,7 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
-  project: default
+  project: gitops
   source:
     repoURL: https://argoproj.github.io/argo-helm
     chart: argo-cd
@@ -19,3 +19,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  syncOptions:
+  - CreateNamespace=true
