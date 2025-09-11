@@ -1,5 +1,5 @@
 server:
   service:
     type: NodePort
-    nodePortHttp: 30080    # optional: fixed NodePort for HTTP
-    nodePortHttps: 30443   # optional: fixed NodePort for HTTPS
+    nodePortHttp: 30080
+    nodePortHttps: 30443
