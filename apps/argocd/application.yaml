@@ -6,16 +6,11 @@ metadata:
 spec:
   project: gitops
   source:
-    repoURL: https://argoproj.github.io/argo-helm
-    chart: argo-cd
-    targetRevision: 6.7.12
-    helm:
-      values: |
-        server:
-          service:
-            type: NodePort
-            nodePortHttp: 30080
-            nodePortHttps: 30443
+    repoURL: https://github.com/ka1ox/my-k8s-apps.git
+    targetRevision: main
+    path: apps/argocd
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
