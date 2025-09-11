@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://argoproj.github.io/argo-helm
     chart: argo-cd
-    targetRevision: 6.7.12          # Helm chart version
+    targetRevision: 6.7.12
     helm:
       valueFiles:
-        - values.yaml               # relative to apps/argocd/
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
@@ -19,5 +19,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
+    syncOptions:               # ✅ must be inside syncPolicy
+      - CreateNamespace=true
