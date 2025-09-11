@@ -1,24 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: prometheus
   namespace: argocd
 spec:
-  project: default
+  project: monitoring
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: 65.1.1   # pick latest version from ArtifactHub
+    targetRevision: 61.0.0   # stable chart version
     helm:
-      releaseName: monitoring
-      values: |
-        grafana:
-          adminPassword: "admin123"
-          service:
-            type: LoadBalancer
-        prometheus:
-          service:
-            type: LoadBalancer
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

@@ -1,17 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: grafana
   namespace: argocd
 spec:
-  project: default
+  project: monitoring
   source:
-    repoURL: https://github.com/ka1ox/my-k8s-apps.git
-    targetRevision: main
-    path: apps/nginx
+    repoURL: https://grafana.github.io/helm-charts
+    chart: grafana
+    targetRevision: 8.6.0
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true
