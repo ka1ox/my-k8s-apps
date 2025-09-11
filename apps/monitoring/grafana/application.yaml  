@@ -8,11 +8,10 @@ spec:
   source:
     repoURL: https://grafana.github.io/helm-charts
     chart: grafana
-    path: apps/monitoring/grafana
-    targetRevision: 8.6.0
+    targetRevision: 8.6.0           # Helm chart version
     helm:
       valueFiles:
-        - values.yaml
+        - values.yaml               # relative to apps/monitoring/grafana/
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -21,4 +20,4 @@ spec:
       prune: true
       selfHeal: true
   syncOptions:
-  - CreateNamespace=true
+    - CreateNamespace=true

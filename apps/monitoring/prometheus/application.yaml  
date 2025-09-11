@@ -8,11 +8,10 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: 61.0.0   # stable chart version
-    path: apps/monitoring/prometheus
+    targetRevision: 61.0.0          # Helm chart version
     helm:
       valueFiles:
-        - values.yaml
+        - values.yaml               # relative to apps/monitoring/prometheus/
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
