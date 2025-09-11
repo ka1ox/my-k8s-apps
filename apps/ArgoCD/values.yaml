@@ -3,5 +3,3 @@ server:
     type: NodePort
     nodePortHttp: 30080    # optional: fixed NodePort for HTTP
     nodePortHttps: 30443   # optional: fixed NodePort for HTTPS
-  ingress:
-    enabled: false
