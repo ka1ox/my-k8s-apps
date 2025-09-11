@@ -1,19 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-apps
+  name: prometheus
   namespace: argocd
 spec:
   project: gitops
   source:
-    repoURL: https://github.com/ka1ox/my-k8s-apps.git
-    targetRevision: main
-    path: apps
-    directory:
-      recurse: true
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 65.0.0   # or latest stable
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true

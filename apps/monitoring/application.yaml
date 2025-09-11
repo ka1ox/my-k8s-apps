@@ -1,18 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: monitoring
   namespace: argocd
 spec:
   project: gitops
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 65.0.0   # pick stable version
-    helm:
-      values: |
-        grafana:
-          enabled: false   # we’ll deploy grafana separately
+    repoURL: https://github.com/ka1ox/my-k8s-apps.git
+    targetRevision: main
+    path: apps/monitoring
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

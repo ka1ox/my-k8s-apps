@@ -8,13 +8,10 @@ spec:
   source:
     repoURL: https://grafana.github.io/helm-charts
     chart: grafana
-    targetRevision: 8.5.12   # pick stable version
+    targetRevision: 8.5.12   # or latest stable
     helm:
-      values: |
-        service:
-          type: NodePort
-          nodePort: 32000
-        adminPassword: admin123   # change this for production
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -22,5 +19,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
