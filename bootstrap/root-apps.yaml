@@ -1,20 +1,51 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: root-apps
+  name: monitoring-root
   namespace: argocd
 spec:
-  project: gitops
-  source:
-    repoURL: https://github.com/ka1ox/my-k8s-apps.git
-    targetRevision: main
-    path: apps
-    directory:
-      recurse: true       # 👈 means all app manifests under apps/ are included
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  generators:
+    - list:
+        elements:
+          - name: prometheus
+            repoURL: https://prometheus-community.github.io/helm-charts
+            chart: kube-prometheus-stack
+            targetRevision: 65.2.0
+            namespace: monitoring
+            valueFiles:
+              - values-prometheus.yaml
+
+          - name: grafana
+            repoURL: https://grafana.github.io/helm-charts
+            chart: grafana
+            targetRevision: 7.3.9
+            namespace: monitoring
+            valueFiles:
+              - values-grafana.yaml
+
+          - name: test-app
+            repoURL: https://charts.bitnami.com/bitnami
+            chart: nginx
+            targetRevision: 15.14.0
+            namespace: test-app
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: bootstrap
+      source:
+        repoURL: '{{repoURL}}'
+        chart: '{{chart}}'
+        targetRevision: '{{targetRevision}}'
+        helm:
+          valueFiles:
+            - '{{valueFiles}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

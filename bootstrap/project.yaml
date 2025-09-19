@@ -1,22 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: gitops
+  name: bootstrap
   namespace: argocd
 spec:
-  description: GitOps project for all apps
+  description: Bootstrap project for monitoring stack and test app
   sourceRepos:
-    - https://github.com/ka1ox/my-k8s-apps.git
-    - https://prometheus-community.github.io/helm-charts
-    - https://grafana.github.io/helm-charts
+    - '*'
   destinations:
-    - namespace: argocd        # 👈 allow Application CRDs to live here
-      server: https://kubernetes.default.svc
-    - namespace: myapp
-      server: https://kubernetes.default.svc
-    - namespace: monitoring
-      server: https://kubernetes.default.svc
-    - namespace: kube-system   # 👈 allow kube-system too
+    - namespace: '*'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
