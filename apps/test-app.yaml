@@ -2,13 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: test-app
-  namespace: argocd
+  namespace: argocd   # ArgoCD always lives in argocd namespace
 spec:
-  project: monitoring
+  project: monitoring # or "default" if your AppProject doesn't allow "test" namespace yet
   source:
-    repoURL: https://github.com/ka1ox/my-k8s-apps.git
-    path: apps
-    targetRevision: HEAD
+    repoURL: https://charts.bitnami.com/bitnami   # example public Helm repo
+    chart: nginx
+    targetRevision: 15.5.3                        # pick a stable version
+    helm:
+      releaseName: test-nginx
+      values: |
+        service:
+          type: NodePort
+          nodePorts:
+            http: 30080
+        replicaCount: 1
   destination:
     server: https://kubernetes.default.svc
     namespace: test
