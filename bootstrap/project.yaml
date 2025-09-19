@@ -12,6 +12,8 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: argocd         # ✅ allow ArgoCD namespace too
       server: https://kubernetes.default.svc
+    - namespace: test             # ✅ allow test namespace
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
