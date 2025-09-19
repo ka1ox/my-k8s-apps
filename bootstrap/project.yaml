@@ -14,6 +14,8 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: test             # ✅ allow test namespace
       server: https://kubernetes.default.svc
+    - namespace: kube-system   # ✅ allow kube-system
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
