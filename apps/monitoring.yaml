@@ -14,6 +14,8 @@ spec:
     targetRevision: 65.3.0
     helm:
       values: |
+          crds:
+            enabled: false   # 🚀 skip installing CRDs here
         admissionWebhooks:
           patch:
             enabled: false
