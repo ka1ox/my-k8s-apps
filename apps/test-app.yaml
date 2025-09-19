@@ -6,13 +6,15 @@ metadata:
 spec:
   project: monitoring
   source:
-    repoURL: https://github.com/kubernetes/ingress-nginx
-    path: deploy/static/provider/cloud
-    targetRevision: main
+    repoURL: https://github.com/ka1ox/my-k8s-apps.git
+    path: apps/test-app
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: test
   syncPolicy:
     automated:
-      selfHeal: true
       prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
