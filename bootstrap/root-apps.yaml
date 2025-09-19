@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/ka1ox/my-k8s-apps.git
     targetRevision: HEAD
-    path: argocd-bootstrap/apps
+    path: apps
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
