@@ -10,6 +10,8 @@ spec:
   destinations:
     - namespace: monitoring
       server: https://kubernetes.default.svc
+    - namespace: argocd         # ✅ allow ArgoCD namespace too
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
