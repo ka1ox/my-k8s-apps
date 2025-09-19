@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: bootstrap
+  name: monitoring
   namespace: argocd
 spec:
-  description: Bootstrap project for monitoring stack and test app
+  description: Project for monitoring stack
   sourceRepos:
     - '*'
   destinations:
-    - namespace: '*'
+    - namespace: monitoring
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'

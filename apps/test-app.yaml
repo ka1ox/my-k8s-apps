@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-apps
+  name: test-app
   namespace: argocd
 spec:
   project: monitoring
   source:
-    repoURL: https://github.com/<your-username>/<your-repo>.git
-    targetRevision: HEAD
-    path: argocd-bootstrap/apps
+    repoURL: https://github.com/kubernetes/ingress-nginx
+    path: deploy/static/provider/cloud
+    targetRevision: master
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: test
   syncPolicy:
     automated:
       selfHeal: true
