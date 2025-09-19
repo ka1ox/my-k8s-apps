@@ -5,22 +5,25 @@ metadata:
   namespace: argocd
 spec:
   project: monitoring
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     targetRevision: 65.3.0
     helm:
-      releaseName: monitoring
       values: |
+        admissionWebhooks:
+          patch:
+            enabled: false
         prometheusOperator:
-          createCustomResource: false
-          cleanupCustomResourceBeforeInstall: false
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring
+          admissionWebhooks:
+            enabled: true
+        grafana:
+          service:
+            type: NodePort
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
