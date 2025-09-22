@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: test-app
+      app: test-nginx
   endpoints:
     - port: http
       path: /metrics

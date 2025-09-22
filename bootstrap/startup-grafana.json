@@ -1,0 +1,65 @@
+{
+  "id": null,
+  "title": "Test App Golden Signals",
+  "tags": ["test-app", "monitoring"],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Request Rate (RPS)",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{app=\"test-app\"}[5m])",
+          "legendFormat": "RPS"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Rate (5xx)",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{app=\"test-app\",status=~\"5..\"}[5m])",
+          "legendFormat": "errors"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Latency (95th Percentile)",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{app=\"test-app\"}[5m])) by (le))",
+          "legendFormat": "p95 latency"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU Usage",
+      "targets": [
+        {
+          "expr": "rate(container_cpu_usage_seconds_total{pod=~\"test-app.*\"}[5m])",
+          "legendFormat": "{{pod}}"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Usage",
+      "targets": [
+        {
+          "expr": "container_memory_working_set_bytes{pod=~\"test-app.*\"}",
+          "legendFormat": "{{pod}}"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 }
+    }
+  ]
+}
